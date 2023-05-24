@@ -29,9 +29,9 @@ public class ReservaVoo extends JFrame implements ActionListener {
         campoOrigem = new JTextField(20);
         JLabel labelDestino = new JLabel("Destino:");
         campoDestino = new JTextField(20);
-        JLabel labelDataIda = new JLabel("Data Ida:");
+        JLabel labelDataIda = new JLabel("Data de Ida:");
         campoDataIda = new JTextField(20);
-        JLabel labelDataVolta = new JLabel("Data Volta:");
+        JLabel labelDataVolta = new JLabel("Data de Volta:");
         campoDataVolta = new JTextField(20);
         JButton botaoReservar = new JButton("Reservar");
 
@@ -68,7 +68,7 @@ public class ReservaVoo extends JFrame implements ActionListener {
 
 
         // Exemplo: exibindo uma mensagem com os detalhes da reserva
-        String mensagem = "Reserva de voo para:\nNome: " + nome + "\nOrigem: " + origem + "\nDestino: " + destino + "\nDataIda:" + dataIda + "\n DataVolta" + dataVolta;
+        String mensagem = "Reserva de voo para:\nNome: " + nome + "\nOrigem: " + origem + "\nDestino: " + destino + "\nData de ida: " + dataIda + "\nData de volta: " + dataVolta;
         JOptionPane.showMessageDialog(this, mensagem);
     }
 
