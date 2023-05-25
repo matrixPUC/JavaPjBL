@@ -1,14 +1,14 @@
-public abstract class Viagem {
-    private String numeroVoo;
+public abstract class Voo {
+    private String numeroVoo; //AB1234
     private String origemVoo;
     private String destinoVoo;
     private String dataPartida;
     private String dataChegada;
-    private String companhiaAerea;
+    private CompanhiaAerea companhiaAerea;
     private int capacidade;
     private float tarifa;
 
-    public Viagem (String numeroVoo, String origemVoo, String destivoVoo, String dataPartida, String dataChegada, String companhiaAerea, int capacidade, float tarifa){
+    public Voo(String numeroVoo, String origemVoo, String destivoVoo, String dataPartida, String dataChegada, CompanhiaAerea companhiaAerea, int capacidade, float tarifa){
         this.numeroVoo = numeroVoo;
         this.origemVoo = origemVoo;
         this.destinoVoo = destivoVoo;
@@ -59,11 +59,11 @@ public abstract class Viagem {
         this.dataChegada = dataChegada;
     }
 
-    public String getCompanhiaAerea() {
+    public CompanhiaAerea getCompanhiaAerea() {
         return companhiaAerea;
     }
 
-    public void setCompanhiaAerea(String companhiaAerea) {
+    public void setCompanhiaAerea(CompanhiaAerea companhiaAerea) {
         this.companhiaAerea = companhiaAerea;
     }
 
