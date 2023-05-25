@@ -41,6 +41,8 @@ public class VooInternacional extends Voo {
         System.out.println("Número do Voo: " + getNumeroVoo());
         System.out.println("Origem: " + getOrigemVoo());
         System.out.println("Destino: " + getDestinoVoo());
+        System.out.println("País de Origem: " + paisOrigem);
+        System.out.println("País de Destino: " + paisDestino);
         System.out.println("Data de Partida: " + getDataPartida());
         System.out.println("Data de Chegada: " + getDataChegada());
         System.out.println("Companhia Aérea: " + getCompanhiaAerea());
