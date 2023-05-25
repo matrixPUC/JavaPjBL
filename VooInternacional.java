@@ -14,12 +14,12 @@ public class VooInternacional extends Viagem {
 
         @Override
         public void exibirInformacoes() {
-            System.out.println("Número do Voo: " + getNumero_Voo());
-            System.out.println("Origem: " + getOrigem_Voo());
-            System.out.println("Destino: " + getDestino_Voo());
-            System.out.println("Data de Partida: " + getData_Partida());
-            System.out.println("Data de Chegada: " + getData_Chegada());
-            System.out.println("Companhia Aérea: " + getCompanhia_Aerea());
+            System.out.println("Número do Voo: " + getNumeroVoo());
+            System.out.println("Origem: " + getOrigemVoo());
+            System.out.println("Destino: " + getDestinoVoo());
+            System.out.println("Data de Partida: " + getDataPartida());
+            System.out.println("Data de Chegada: " + getDataChegada());
+            System.out.println("Companhia Aérea: " + getCompanhiaAerea());
             System.out.println("Capacidade: " + getCapacidade());
             System.out.println("Tarifa: " + getTarifa());
         }
