@@ -12,7 +12,31 @@ public class VooInternacional extends Viagem {
             this.necessitaVisto = necessitaVisto;
         }
 
-        @Override
+    public String getPaisOrigem() {
+        return paisOrigem;
+    }
+
+    public void setPaisOrigem(String paisOrigem) {
+        this.paisOrigem = paisOrigem;
+    }
+
+    public String getPaisDestino() {
+        return paisDestino;
+    }
+
+    public void setPaisDestino(String paisDestino) {
+        this.paisDestino = paisDestino;
+    }
+
+    public boolean isNecessitaVisto() {
+        return necessitaVisto;
+    }
+
+    public void setNecessitaVisto(boolean necessitaVisto) {
+        this.necessitaVisto = necessitaVisto;
+    }
+
+    @Override
         public void exibirInformacoes() {
             System.out.println("Número do Voo: " + getNumeroVoo());
             System.out.println("Origem: " + getOrigemVoo());
