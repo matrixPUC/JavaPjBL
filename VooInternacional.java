@@ -36,7 +36,7 @@ public class VooInternacional extends Viagem {
         this.necessitaVisto = necessitaVisto;
     }
 
-    @Override
+    @Override  
         public void exibirInformacoes() {
             System.out.println("Número do Voo: " + getNumeroVoo());
             System.out.println("Origem: " + getOrigemVoo());
