@@ -46,5 +46,10 @@ public class VooInternacional extends Voo {
         System.out.println("Companhia Aérea: " + getCompanhiaAerea());
         System.out.println("Capacidade: " + getCapacidade());
         System.out.println("Tarifa: " + getTarifa());
+        if (necessitaVisto) {
+            System.out.println("Necessita de visto: Sim");
+        } else {
+            System.out.println("Necessita de visto: Não");
+        }
     }
 }
