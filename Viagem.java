@@ -1,70 +1,70 @@
 public abstract class Viagem {
-    private String numero_Voo;
-    private String origem_Voo;
-    private String destino_Voo;
-    private String data_Partida;
-    private String data_Chegada;
-    private String companhia_Aerea;
+    private String numeroVoo;
+    private String origemVoo;
+    private String destinoVoo;
+    private String dataPartida;
+    private String dataChegada;
+    private String companhiaAerea;
     private int capacidade;
     private float tarifa;
 
-    public Viagem (String numero_Voo, String origem_Voo, String destivo_Voo, String data_Partida, String data_Chegada, String companhia_Aerea, int capacidade, float tarifa){
-        this.numero_Voo = numero_Voo;
-        this.origem_Voo = origem_Voo;
-        this.destino_Voo = destivo_Voo;
-        this.data_Partida = data_Partida;
-        this.data_Chegada = data_Chegada;
-        this.companhia_Aerea = companhia_Aerea;
+    public Viagem (String numeroVoo, String origemVoo, String destivoVoo, String dataPartida, String dataChegada, String companhiaAerea, int capacidade, float tarifa){
+        this.numeroVoo = numeroVoo;
+        this.origemVoo = origemVoo;
+        this.destinoVoo = destivoVoo;
+        this.dataPartida = dataPartida;
+        this.dataChegada = dataChegada;
+        this.companhiaAerea = companhiaAerea;
         this.capacidade = capacidade;
         this.tarifa = tarifa;
     }
 
-    public String getNumero_Voo() {
-        return numero_Voo;
+    public String getNumeroVoo() {
+        return numeroVoo;
     }
 
-    public void setNumero_Voo(String numero_Voo) {
-        this.numero_Voo = numero_Voo;
+    public void setNumeroVoo(String numeroVoo) {
+        this.numeroVoo = numeroVoo;
     }
 
-    public String getOrigem_Voo() {
-        return origem_Voo;
+    public String getOrigemVoo() {
+        return origemVoo;
     }
 
-    public void setOrigem_Voo(String origem_Voo) {
-        this.origem_Voo = origem_Voo;
+    public void setOrigemVoo(String origemVoo) {
+        this.origemVoo = origemVoo;
     }
 
-    public String getDestino_Voo() {
-        return destino_Voo;
+    public String getDestinoVoo() {
+        return destinoVoo;
     }
 
-    public void setDestino_Voo(String destino_Voo) {
-        this.destino_Voo = destino_Voo;
+    public void setDestinoVoo(String destinoVoo) {
+        this.destinoVoo = destinoVoo;
     }
 
-    public String getData_Partida() {
-        return data_Partida;
+    public String getDataPartida() {
+        return dataPartida;
     }
 
-    public void setData_Partida(String data_Partida) {
-        this.data_Partida = data_Partida;
+    public void setDataPartida(String dataPartida) {
+        this.dataPartida = dataPartida;
     }
 
-    public String getData_Chegada() {
-        return data_Chegada;
+    public String getDataChegada() {
+        return dataChegada;
     }
 
-    public void setData_Chegada(String data_Chegada) {
-        this.data_Chegada = data_Chegada;
+    public void setDataChegada(String dataChegada) {
+        this.dataChegada = dataChegada;
     }
 
-    public String getCompanhia_Aerea() {
-        return companhia_Aerea;
+    public String getCompanhiaAerea() {
+        return companhiaAerea;
     }
 
-    public void setCompanhia_Aerea(String companhia_Aerea) {
-        this.companhia_Aerea = companhia_Aerea;
+    public void setCompanhiaAerea(String companhiaAerea) {
+        this.companhiaAerea = companhiaAerea;
     }
 
     public int getCapacidade() {

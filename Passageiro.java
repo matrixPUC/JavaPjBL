@@ -2,7 +2,7 @@ public class Passageiro {
     private String nome;
     private String sobrenome;
     private int cpf;
-    private int data_Nascimento;
+    private int dataNascimento;
     private double saldo;
 
     public String getNome() {
@@ -25,12 +25,12 @@ public class Passageiro {
         return cpf;
     }
 
-    public int getData_Nascimento() {
-        return data_Nascimento;
+    public int getDataNascimento() {
+        return dataNascimento;
     }
 
-    public void setData_Nascimento(int data_Nascimento) {
-        this.data_Nascimento = data_Nascimento;
+    public void setDataNascimento(int dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public void setCpf(int cpf) {
