@@ -3,15 +3,17 @@ public class Passageiro {
     private String email;
     private String endereco;
     private String telefone;
-    private int cpf;
+    private String passaporte;
+    private String cpf;
     private int dataNascimento;
     private double saldo;
 
-    public Passageiro(String nome, String email, String endereco, String telefone, int cpf, int dataNascimento, double saldo) {
+    public Passageiro(String nome, String email, String endereco, String telefone,String passaporte, String cpf, int dataNascimento, double saldo) {
         this.nome = nome;
         this.email = email;
         this.endereco = endereco;
         this.telefone = telefone;
+        this.passaporte = passaporte;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.saldo = saldo;
@@ -49,11 +51,19 @@ public class Passageiro {
         this.telefone = telefone;
     }
 
-    public int getCpf() {
+    public String getPassaporte() {
+        return passaporte;
+    }
+
+    public void setPassaporte(String passaporte) {
+        this.passaporte = passaporte;
+    }
+
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

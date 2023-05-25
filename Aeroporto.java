@@ -4,9 +4,9 @@ public class Aeroporto {
     private String nome;
     private String endereco;
     private String codIATAAeroporto;
-    private ArrayList<Viagem> lista_voos;
+    private ArrayList<String> lista_voos; // lista dos números dos voos
 
-    public Aeroporto(String nome, String endereco, String codIATAAeroporto, ArrayList<Viagem> lista_voos) {
+    public Aeroporto(String nome, String endereco, String codIATAAeroporto, ArrayList<String> lista_voos) {
         this.nome = nome;
         this.endereco = endereco;
         this.codIATAAeroporto = codIATAAeroporto;
@@ -37,11 +37,11 @@ public class Aeroporto {
         this.codIATAAeroporto = codIATAAeroporto;
     }
 
-    public ArrayList<Viagem> getLista_voos() {
+    public ArrayList<Voo> getLista_voos() {
         return lista_voos;
     }
 
-    public void setLista_voos(ArrayList<Viagem> lista_voos) {
+    public void setLista_voos(ArrayList<Voo> lista_voos) {
         this.lista_voos = lista_voos;
     }
 }
