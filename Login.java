@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Login {
     JButton confirma;
@@ -40,7 +42,13 @@ public class Login {
         JFrame frame = new JFrame();
         frame.setLayout(new GridLayout(3, 1));
         frame.setResizable(false);
-        frame.setSize(700,700);
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                new FirstFrame();
+                e.getWindow().dispose();
+            }
+        });
         frame.add(loginTitle);
         frame.add(container);
         frame.add(confirma);
