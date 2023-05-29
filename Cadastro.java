@@ -18,6 +18,8 @@ public class Cadastro {
 
         JTextField campoNome = new JTextField(20);
         JTextField campoEmail = new JTextField(20);
+        // Pattern EMAIL_REGEX = Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);
+
         JTextField campoSenha = new JTextField(20);
         JTextField campoEndereco = new JTextField(20);
         JTextField campoTelefone = new JTextField(20);
