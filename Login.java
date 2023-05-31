@@ -7,6 +7,7 @@ import java.awt.event.WindowEvent;
 
 public class Login extends JFrame implements ActionListener {
     JButton confirma;
+    JButton voltar;
     private static Conta contaLogada;
     private JTextField campoEmail;
     private JTextField campoSenha;
@@ -27,8 +28,22 @@ public class Login extends JFrame implements ActionListener {
         confirma.setHorizontalAlignment(JButton.CENTER);
         confirma.addActionListener(this);
 
-        JLabel buttonContainer = new JLabel();
+        voltar = new JButton("Voltar");
+        voltar.setFocusable(false);
+        voltar.setBackground(Color.gray);
+        voltar.setVerticalAlignment(JButton.CENTER);
+        voltar.setHorizontalAlignment(JButton.CENTER);
+        voltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                new FirstFrame();
+            }
+        });
+
+        JPanel buttonContainer = new JPanel();
         buttonContainer.add(confirma);
+        buttonContainer.add(voltar);
 
         JPanel container = new JPanel();
         container.setLayout(new GridLayout(2,2));
@@ -44,7 +59,7 @@ public class Login extends JFrame implements ActionListener {
         loginTitle.setVerticalAlignment(JLabel.CENTER);
         loginTitle.setHorizontalAlignment(JLabel.CENTER);
 
-        setLayout(new GridLayout(3, 1));
+        setLayout(new BorderLayout());
         setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -53,9 +68,9 @@ public class Login extends JFrame implements ActionListener {
                 e.getWindow().dispose();
             }
         });
-        add(loginTitle);
-        add(container);
-        add(confirma);
+        add(loginTitle, BorderLayout.NORTH);
+        add(container, BorderLayout.CENTER);
+        add(buttonContainer, BorderLayout.SOUTH);
         pack();
         setVisible(true);
     }
@@ -76,7 +91,8 @@ public class Login extends JFrame implements ActionListener {
                 return;
             }
         }
-            JOptionPane.showMessageDialog(null, "Erro!", "Erro!", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Erro!", "Erro!", JOptionPane.WARNING_MESSAGE);
 
     }
+
 }
