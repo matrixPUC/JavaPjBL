@@ -5,11 +5,12 @@ public class Passageiro {
     private int dataNascimento;
     private Conta contaDono;
 
-    public Passageiro(String nome, String email, String endereco, String telefone,String passaporte, String cpf, int dataNascimento, double saldo) {
+    public Passageiro(String nome, String passaporte, String cpf, int dataNascimento, Conta contaDono) {
         this.nome = nome;
         this.passaporte = passaporte;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
+        this.contaDono = contaDono;
     }
 
     public String getNome() {
@@ -18,10 +19,6 @@ public class Passageiro {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Conta getContaDono() {
-        return contaDono;
     }
 
     public String getPassaporte() {
@@ -48,4 +45,11 @@ public class Passageiro {
         this.dataNascimento = dataNascimento;
     }
 
+    public Conta getContaDono() {
+        return contaDono;
+    }
+
+    public void setContaDono(Conta contaDono) {
+        this.contaDono = contaDono;
+    }
 }

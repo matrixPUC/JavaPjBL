@@ -8,9 +8,7 @@ public class ReservaVoo extends JFrame implements ActionListener {
     private JTextField campoNome;
     private JTextField campoOrigem;
     private JTextField campoDestino;
-
     private JTextField campoDataIda;
-
     private JTextField campoDataVolta;
 
     public ReservaVoo() {
@@ -48,8 +46,6 @@ public class ReservaVoo extends JFrame implements ActionListener {
         add(campoDataIda);
         add(labelDataVolta);
         add(campoDataVolta);
-
-
         add(botaoReservar);
 
         // Define o ActionListener para o botão
