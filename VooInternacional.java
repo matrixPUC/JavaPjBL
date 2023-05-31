@@ -1,16 +1,16 @@
-public class VooInternacional extends Voo {
-        private String paisOrigem;
-        private String paisDestino;
-        private boolean necessitaVisto;
+import java.util.ArrayList;
 
-        public VooInternacional(String numeroVoo, String origemVoo, String destinoVoo, String dataPartida, String dataChegada,
-                                CompanhiaAerea companhiaAerea, int capacidade, float tarifa, String paisOrigem, String paisDestino,
-                                boolean necessitaVisto) {
-            super(numeroVoo, origemVoo, destinoVoo, dataPartida, dataChegada, companhiaAerea, capacidade, tarifa);
-            this.paisOrigem = paisOrigem;
-            this.paisDestino = paisDestino;
-            this.necessitaVisto = necessitaVisto;
-        }
+public class VooInternacional extends Voo {
+    private String paisOrigem;
+    private String paisDestino;
+    private boolean necessitaVisto;
+
+    public VooInternacional(String numeroVoo, Aeroporto origemVoo, Aeroporto destinoVoo, String dataPartida, String dataChegada, CompanhiaAerea companhiaAerea, int capacidade, float tarifa, String paisOrigem, String paisDestino, boolean necessitaVisto) {
+        super(numeroVoo, origemVoo, destinoVoo, dataPartida, dataChegada, companhiaAerea, capacidade, tarifa);
+        this.paisOrigem = paisOrigem;
+        this.paisDestino = paisDestino;
+        this.necessitaVisto = necessitaVisto;
+    }
 
     public String getPaisOrigem() {
         return paisOrigem;
