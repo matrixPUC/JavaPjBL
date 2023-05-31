@@ -1,10 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class Login {
+public class Login extends JFrame implements ActionListener {
     JButton confirma;
+    private static Conta contaLogada;
+    private JTextField campoEmail;
+    private JTextField campoSenha;
 
     public Login () {
 
@@ -12,15 +17,15 @@ public class Login {
         emailLabel.setBounds(100,0,250,50);
         JLabel senhaLabel = new JLabel("Senha");
 
-        JTextField campoEmail = new JTextField(20);
-        JTextField campoSenha = new JTextField(20);
-
+        campoEmail = new JTextField(20);
+        campoSenha = new JTextField(20);
 
         confirma = new JButton("Confirmar");
         confirma.setFocusable(false);
         confirma.setBackground(Color.gray);
         confirma.setVerticalAlignment(JButton.CENTER);
         confirma.setHorizontalAlignment(JButton.CENTER);
+        confirma.addActionListener(this);
 
         JLabel buttonContainer = new JLabel();
         buttonContainer.add(confirma);
@@ -39,21 +44,40 @@ public class Login {
         loginTitle.setVerticalAlignment(JLabel.CENTER);
         loginTitle.setHorizontalAlignment(JLabel.CENTER);
 
-        JFrame frame = new JFrame();
-        frame.setLayout(new GridLayout(3, 1));
-        frame.setResizable(false);
-        frame.addWindowListener(new WindowAdapter() {
+        setLayout(new GridLayout(3, 1));
+        setResizable(false);
+        addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 new FirstFrame();
                 e.getWindow().dispose();
             }
         });
-        frame.add(loginTitle);
-        frame.add(container);
-        frame.add(confirma);
-        frame.pack();
-        frame.setVisible(true);
+        add(loginTitle);
+        add(container);
+        add(confirma);
+        pack();
+        setVisible(true);
+    }
+    public Conta getContaLogada() {
+        return contaLogada;
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        String email = campoEmail.getText();
+        String senha = campoSenha.getText();
+
+        for (int i = 0; i < Cadastro.getCadastros().size(); i++) {
+            if (email.equals(Cadastro.getCadastros().get(i).getEmail())) {
+                contaLogada = Cadastro.getCadastros().get(i);
+                new ReservaVoo();
+                dispose();
+                return;
+            }
+        }
+            JOptionPane.showMessageDialog(null, "Erro!", "Erro!", JOptionPane.WARNING_MESSAGE);
 
     }
+
 }

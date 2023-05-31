@@ -19,6 +19,7 @@ public class ReservaVoo extends JFrame implements ActionListener {
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(6, 2));
+        setVisible(true);
 
         // Componentes da interface
         JLabel labelNome = new JLabel("Nome:");
