@@ -119,6 +119,20 @@ public class Cadastro extends JFrame implements ActionListener {
         }
 
 
+        if (!EmailValidator.isValidEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Email inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!telefone.matches("^\\d+$")) {
+            JOptionPane.showMessageDialog(this, "Telefone inválido! Apenas números são permitidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!CPFValidator.isValidCPF(cpf)) {
+            JOptionPane.showMessageDialog(this, "CPF inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         cadastros.add(new Conta(nome, email, senha, endereco, telefone, passaporte, cpf, dataNascimento));
         new FirstFrame();
         dispose();
