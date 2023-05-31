@@ -1,3 +1,5 @@
+import java.util.Date;
+
 public class Conta {
     private String nome;
     private String email;
@@ -6,10 +8,10 @@ public class Conta {
     private String telefone;
     private String passaporte;
     private String cpf;
-    private int dataNascimento;
+    private Date dataNascimento;
     private double saldo;
 
-    public Conta (String nome, String email, String senha, String endereco, String telefone, String passaporte, String cpf, int dataNascimento) {
+    public Conta (String nome, String email, String senha, String endereco, String telefone, String passaporte, String cpf, Date dataNascimento) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -61,8 +63,20 @@ public class Conta {
 
     public String getCpf() {return cpf;}
 
-    public int getDataNascimento() {
+    public void setPassaporte(String passaporte) {
+        this.passaporte = passaporte;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Date getDataNascimento() {
         return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public double getSaldo() {

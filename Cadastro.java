@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Cadastro extends JFrame implements ActionListener {
     private static ArrayList<Conta> cadastros;
@@ -103,7 +106,18 @@ public class Cadastro extends JFrame implements ActionListener {
         String telefone = campoTelefone.getText();
         String passaporte = campoPassaporte.getText();
         String cpf = campoCpf.getText();
-        int dataNascimento = Integer.parseInt(campoData.getText());
+        Date dataNascimento = null;
+        
+        try {
+
+            SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+            String dataNascimentoStr = campoData.getText();
+            dataNascimento = formatoData.parse(dataNascimentoStr);
+        }
+        catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Formato de data incorreto!","Erro!",JOptionPane.WARNING_MESSAGE );
+        }
+
 
         if (!EmailValidator.isValidEmail(email)) {
             JOptionPane.showMessageDialog(this, "Email inválido!", "Erro", JOptionPane.ERROR_MESSAGE);

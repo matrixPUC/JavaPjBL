@@ -1,11 +1,13 @@
+import java.util.Date;
+
 public class Passageiro {
     private String nome;
     private String passaporte;
     private String cpf;
-    private int dataNascimento;
+    private Date dataNascimento;
     private Conta contaDono;
 
-    public Passageiro(String nome, String passaporte, String cpf, int dataNascimento, Conta contaDono) {
+    public Passageiro(String nome, String passaporte, String cpf, Date dataNascimento, Conta contaDono) {
         this.nome = nome;
         this.passaporte = passaporte;
         this.cpf = cpf;
@@ -37,11 +39,11 @@ public class Passageiro {
         this.cpf = cpf;
     }
 
-    public int getDataNascimento() {
+    public Date getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(int dataNascimento) {
+    public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
