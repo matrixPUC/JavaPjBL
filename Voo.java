@@ -1,17 +1,19 @@
+import java.util.ArrayList;
+
 public abstract class Voo {
-    private String numeroVoo; //AB1234
-    private String origemVoo;
-    private String destinoVoo;
+    private String numeroVoo;
+    private Aeroporto origemVoo;
+    private Aeroporto destinoVoo;
     private String dataPartida;
     private String dataChegada;
     private CompanhiaAerea companhiaAerea;
     private int capacidade;
     private float tarifa;
 
-    public Voo(String numeroVoo, String origemVoo, String destivoVoo, String dataPartida, String dataChegada, CompanhiaAerea companhiaAerea, int capacidade, float tarifa){
+    public Voo(String numeroVoo, Aeroporto origemVoo, Aeroporto destinoVoo, String dataPartida, String dataChegada, CompanhiaAerea companhiaAerea, int capacidade, float tarifa) {
         this.numeroVoo = numeroVoo;
         this.origemVoo = origemVoo;
-        this.destinoVoo = destivoVoo;
+        this.destinoVoo = destinoVoo;
         this.dataPartida = dataPartida;
         this.dataChegada = dataChegada;
         this.companhiaAerea = companhiaAerea;
@@ -27,19 +29,19 @@ public abstract class Voo {
         this.numeroVoo = numeroVoo;
     }
 
-    public String getOrigemVoo() {
+    public Aeroporto getOrigemVoo() {
         return origemVoo;
     }
 
-    public void setOrigemVoo(String origemVoo) {
+    public void setOrigemVoo(Aeroporto origemVoo) {
         this.origemVoo = origemVoo;
     }
 
-    public String getDestinoVoo() {
+    public Aeroporto getDestinoVoo() {
         return destinoVoo;
     }
 
-    public void setDestinoVoo(String destinoVoo) {
+    public void setDestinoVoo(Aeroporto destinoVoo) {
         this.destinoVoo = destinoVoo;
     }
 

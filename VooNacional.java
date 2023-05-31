@@ -1,6 +1,19 @@
+import java.util.ArrayList;
+
 public class VooNacional extends Voo {
-    public VooNacional(String numeroVoo, String origemVoo, String destivoVoo, String dataPartida, String dataChegada, CompanhiaAerea companhiaAerea, int capacidade, float tarifa) {
-        super(numeroVoo, origemVoo, destivoVoo, dataPartida, dataChegada, companhiaAerea, capacidade, tarifa);
+    private double taxaDomestica;
+
+    public VooNacional(String numeroVoo, Aeroporto origemVoo, Aeroporto destinoVoo, String dataPartida, String dataChegada, CompanhiaAerea companhiaAerea, int capacidade, float tarifa, double taxaDomestica) {
+        super(numeroVoo, origemVoo, destinoVoo, dataPartida, dataChegada, companhiaAerea, capacidade, tarifa);
+        this.taxaDomestica = taxaDomestica;
+    }
+
+    public double getTaxaDomestica() {
+        return taxaDomestica;
+    }
+
+    public void setTaxaDomestica(double taxaDomestica) {
+        this.taxaDomestica = taxaDomestica;
     }
 
     @Override

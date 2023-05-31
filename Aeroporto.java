@@ -4,13 +4,15 @@ public class Aeroporto {
     private String nome;
     private String endereco;
     private String codIATAAeroporto;
-    private ArrayList<Voo> lista_voos; // lista dos números dos voos
+    private ArrayList<VooNacional> voosNacionais;
+    private ArrayList<VooInternacional> voosInternacionais;
 
-    public Aeroporto(String nome, String endereco, String codIATAAeroporto, ArrayList<Voo> lista_voos) {
+    public Aeroporto(String nome, String endereco, String codIATAAeroporto, ArrayList<VooNacional> voosNacionais, ArrayList<VooInternacional> voosInternacionais) {
         this.nome = nome;
         this.endereco = endereco;
         this.codIATAAeroporto = codIATAAeroporto;
-        this.lista_voos = lista_voos;
+        this.voosNacionais = voosNacionais;
+        this.voosInternacionais = voosInternacionais;
     }
 
     public String getNome() {
@@ -37,11 +39,26 @@ public class Aeroporto {
         this.codIATAAeroporto = codIATAAeroporto;
     }
 
-    public ArrayList<Voo> getLista_voos() {
-        return lista_voos;
+    public ArrayList<VooNacional> getVoosNacionais() {
+        return voosNacionais;
     }
 
-    public void setLista_voos(ArrayList<Voo> lista_voos) {
-        this.lista_voos = lista_voos;
+    public void setVoosNacionais(ArrayList<VooNacional> voosNacionais) {
+        this.voosNacionais = voosNacionais;
+    }
+
+    public ArrayList<VooInternacional> getVoosInternacionais() {
+        return voosInternacionais;
+    }
+
+    public void setVoosInternacionais(ArrayList<VooInternacional> voosInternacionais) {
+        this.voosInternacionais = voosInternacionais;
+    }
+
+    public void inserirVooNacional (VooNacional vooNacional) {
+        voosNacionais.add(vooNacional);
+    }
+    public void inserirVooInternacional (VooInternacional vooInternacional) {
+        voosInternacionais.add(vooInternacional);
     }
 }
