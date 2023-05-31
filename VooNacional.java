@@ -27,4 +27,10 @@ public class VooNacional extends Voo {
         System.out.println("Capacidade: " + getCapacidade());
         System.out.println("Tarifa: " + getTarifa());
     }
+
+    @Override
+    public void localizarVoo() {
+        // quando um novo voo é criado
+        // este voo é adicionado à lista de voos do aeroporto de origem
+    }
 }

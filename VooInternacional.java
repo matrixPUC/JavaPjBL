@@ -52,4 +52,10 @@ public class VooInternacional extends Voo {
             System.out.println("Necessita de visto: Não");
         }
     }
+
+    @Override
+    public void localizarVoo() {
+        // quando um novo voo é criado
+        // este voo é adicionado à lista de voos do aeroporto de origem
+    }
 }

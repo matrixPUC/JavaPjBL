@@ -9,6 +9,7 @@ public abstract class Voo {
     private CompanhiaAerea companhiaAerea;
     private int capacidade;
     private float tarifa;
+    private static ArrayList<Voo> voos;
 
     public Voo(String numeroVoo, Aeroporto origemVoo, Aeroporto destinoVoo, String dataPartida, String dataChegada, CompanhiaAerea companhiaAerea, int capacidade, float tarifa) {
         this.numeroVoo = numeroVoo;
@@ -86,5 +87,7 @@ public abstract class Voo {
     }
 
     public abstract void exibirInformacoes();
+
+    public abstract void localizarVoo();
 }
 
