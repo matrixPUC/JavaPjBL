@@ -70,13 +70,19 @@ public class Login extends JFrame implements ActionListener {
 
         for (int i = 0; i < Cadastro.getCadastros().size(); i++) {
             if (email.equals(Cadastro.getCadastros().get(i).getEmail())) {
-                contaLogada = Cadastro.getCadastros().get(i);
-                new ReservaVoo();
-                dispose();
-                return;
+                if(senha.equals(Cadastro.getCadastros().get(i).getSenha())) {
+                    contaLogada = Cadastro.getCadastros().get(i);
+                    new ReservaVoo();
+                    dispose();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Senha Inválida!", "Erro!", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Email Inválido!", "Erro!", JOptionPane.WARNING_MESSAGE);
             }
         }
-            JOptionPane.showMessageDialog(null, "Erro!", "Erro!", JOptionPane.WARNING_MESSAGE);
 
     }
 }
