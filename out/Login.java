@@ -11,10 +11,10 @@ public class Login extends JFrame implements ActionListener {
     private JTextField campoEmail;
     private JPasswordField campoSenha;
 
-    public Login () {
+    public Login() {
 
         JLabel emailLabel = new JLabel("Email");
-        emailLabel.setBounds(100,0,250,50);
+        emailLabel.setBounds(100, 0, 250, 50);
         JLabel senhaLabel = new JLabel("Senha");
 
         campoEmail = new JTextField(20);
@@ -22,7 +22,7 @@ public class Login extends JFrame implements ActionListener {
 
         confirma = new JButton("Confirmar");
         confirma.setFocusable(false);
-        confirma.setBackground(Color.green);
+        confirma.setBackground(Color.gray);
         confirma.setVerticalAlignment(JButton.CENTER);
         confirma.setHorizontalAlignment(JButton.CENTER);
         confirma.addActionListener(this);
@@ -31,7 +31,7 @@ public class Login extends JFrame implements ActionListener {
         buttonContainer.add(confirma);
 
         JPanel container = new JPanel();
-        container.setLayout(new GridLayout(2,2));
+        container.setLayout(new GridLayout(2, 2));
         container.add(emailLabel);
         container.add(campoEmail);
         container.add(senhaLabel);
@@ -40,7 +40,7 @@ public class Login extends JFrame implements ActionListener {
         JLabel loginTitle = new JLabel();
         loginTitle.setFont(new Font(null, Font.BOLD, 20));
         loginTitle.setText("Login");
-        loginTitle.setSize(100,100);
+        loginTitle.setSize(100, 100);
         loginTitle.setVerticalAlignment(JLabel.CENTER);
         loginTitle.setHorizontalAlignment(JLabel.CENTER);
 
@@ -70,18 +70,6 @@ public class Login extends JFrame implements ActionListener {
         String senha = new String(campoSenha.getPassword());
 
         try {
-            if (email.isBlank()) {
-                throw new AutenticacaoException("Erro de autenticação: email em branco");
-            }
-
-            if (senha.isBlank()) {
-                throw new AutenticacaoException("Erro de autenticação: senha em branco");
-            }
-
-            if (!EmailValidator.isValidEmail(email)) {
-                throw new AutenticacaoException("Erro de autenticação: email fora do padrão");
-            }
-
             boolean autenticado = autenticarUsuario(email, senha);
 
             if (autenticado) {
@@ -96,13 +84,28 @@ public class Login extends JFrame implements ActionListener {
     }
 
     public boolean autenticarUsuario(String email, String senha) throws AutenticacaoException {
-        for (Conta conta : Cadastro.getCadastros()) {
-            if (email.equals(conta.getEmail())) {
-                contaLogada = conta;
-                return senha.equals(conta.getSenha());
+        if (email.isBlank()) {
+            throw new AutenticacaoException("Erro de autenticação: email em branco");
+        }
+
+        if (!EmailValidator.isValidEmail(email)) {
+            throw new AutenticacaoException("Erro de autenticação: email fora do padrão");
+        }
+
+        boolean emailCadastrado = false;
+
+        for (int i = 0; i < Cadastro.getCadastros().size(); i++) {
+            if (email.equals(Cadastro.getCadastros().get(i).getEmail())) {
+                contaLogada = Cadastro.getCadastros().get(i);
+                emailCadastrado = true;
+                break;
             }
         }
 
-        throw new AutenticacaoException("Erro de autenticação: email não cadastrado");
+        if (!emailCadastrado) {
+            throw new AutenticacaoException("Erro de autenticação: email não cadastrado");
+        }
+
+        return senha.equals(contaLogada.getSenha());
     }
 }

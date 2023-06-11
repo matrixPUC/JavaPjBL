@@ -4,25 +4,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.text.MaskFormatter;
 
 public class Cadastro extends JFrame implements ActionListener {
-    private static ArrayList<Conta> cadastros;
+    private static ArrayList<Conta> cadastros = new ArrayList<>();
     JButton criar;
     private JTextField campoNome;
     private JTextField campoEmail;
-    private JTextField campoSenha;
+    private JPasswordField campoSenha;
     private JTextField campoEndereco;
     private JTextField campoTelefone;
     private JTextField campoPassaporte;
     private JTextField campoCpf;
-    private JTextField campoData;
+    private JFormattedTextField campoData;
 
     public Cadastro() {
         cadastros = new ArrayList<>();
 
         JLabel nomeLabel = new JLabel("Nome");
-        nomeLabel.setBounds(100,0,200,60);
+        nomeLabel.setBounds(100, 0, 200, 60);
         JLabel emailLabel = new JLabel("Email");
         JLabel senhaLabel = new JLabel("Senha");
         JLabel enderecoLabel = new JLabel("Endereço");
@@ -33,12 +36,13 @@ public class Cadastro extends JFrame implements ActionListener {
 
         campoNome = new JTextField(20);
         campoEmail = new JTextField(20);
-        campoSenha = new JTextField(20);
+        campoSenha = new JPasswordField(20);
         campoEndereco = new JTextField(20);
         campoTelefone = new JTextField(20);
         campoPassaporte = new JTextField(20);
         campoCpf = new JTextField(20);
-        campoData = new JTextField(20);
+        campoData = new JFormattedTextField(createMaskFormatter("##-##-####"));
+        campoData.setColumns(20);
 
         criar = new JButton("Criar Conta");
         criar.setFocusable(false);
@@ -48,7 +52,7 @@ public class Cadastro extends JFrame implements ActionListener {
         criar.addActionListener(this);
 
         JPanel container = new JPanel();
-        container.setLayout(new GridLayout(4,4));
+        container.setLayout(new GridLayout(4, 4));
         container.add(nomeLabel);
         container.add(campoNome);
         container.add(emailLabel);
@@ -69,7 +73,7 @@ public class Cadastro extends JFrame implements ActionListener {
         JLabel cadastroTitle = new JLabel();
         cadastroTitle.setFont(new Font(null, Font.BOLD, 20));
         cadastroTitle.setText("Cadastro");
-        cadastroTitle.setSize(100,100);
+        cadastroTitle.setSize(100, 100);
         cadastroTitle.setVerticalAlignment(JLabel.CENTER);
         cadastroTitle.setHorizontalAlignment(JLabel.CENTER);
 
@@ -95,15 +99,14 @@ public class Cadastro extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         String nome = campoNome.getText();
         String email = campoEmail.getText();
-        String senha = campoSenha.getText();
+        String senha = new String(campoSenha.getPassword());
         String endereco = campoEndereco.getText();
         String telefone = campoTelefone.getText();
         String passaporte = campoPassaporte.getText();
         String cpf = campoCpf.getText();
-        int dataNascimento = Integer.parseInt(campoData.getText());
+        String dataNascimento = campoData.getText();
 
         if (!EmailValidator.isValidEmail(email)) {
             JOptionPane.showMessageDialog(this, "Email inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -111,7 +114,8 @@ public class Cadastro extends JFrame implements ActionListener {
         }
 
         if (!telefone.matches("^\\d+$")) {
-            JOptionPane.showMessageDialog(this, "Telefone inválido! Apenas números são permitidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Telefone inválido! Apenas números são permitidos.", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -119,9 +123,61 @@ public class Cadastro extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "CPF inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        cadastros.add(new Conta(nome, email, senha, endereco, telefone, passaporte, cpf, dataNascimento));
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        dateFormat.setLenient(false);
+
+        try {
+            dateFormat.parse(dataNascimento);
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Data de Nascimento inválida! Digite uma data válida no formato DD-MM-AAAA.", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int dataNascimentoInt = Integer.parseInt(dataNascimento.replace("-", ""));
+
+        // Restrição de idade
+        int anoAtual = 2022; // Ano atual
+        int anoNascimento = Integer.parseInt(dataNascimento.substring(6));
+        int idade = anoAtual - anoNascimento;
+
+        if (idade > 120) {
+            JOptionPane.showMessageDialog(this, "Idade inválida! A idade máxima permitida é de 120 anos.", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        } else if (idade < 18) {
+            JOptionPane.showMessageDialog(this, "Idade inválida! É necessário ter no mínimo 18 anos.", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        cadastros.add(new Conta(nome, email, senha, endereco, telefone, passaporte, cpf, dataNascimentoInt));
+        JOptionPane.showMessageDialog(this, "Cadastro realizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+        limparCampos();
         new FirstFrame();
         dispose();
+    }
 
+    private void limparCampos() {
+        campoNome.setText("");
+        campoEmail.setText("");
+        campoSenha.setText("");
+        campoEndereco.setText("");
+        campoTelefone.setText("");
+        campoPassaporte.setText("");
+        campoCpf.setText("");
+        campoData.setText("");
+    }
+
+    private MaskFormatter createMaskFormatter(String mask) {
+        MaskFormatter formatter = null;
+        try {
+            formatter = new MaskFormatter(mask);
+            formatter.setPlaceholderCharacter('_');
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formatter;
     }
 }
