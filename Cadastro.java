@@ -11,7 +11,8 @@ import java.text.SimpleDateFormat;
 
 public class Cadastro extends JFrame implements ActionListener {
     private static ArrayList<Conta> cadastros;
-    JButton criar;
+    private JButton criar;
+    private JButton voltar;
     private JTextField campoNome;
     private JTextField campoEmail;
     private JTextField campoSenha;
@@ -25,7 +26,7 @@ public class Cadastro extends JFrame implements ActionListener {
         cadastros = new ArrayList<>();
 
         JLabel nomeLabel = new JLabel("Nome");
-        nomeLabel.setBounds(100,0,200,60);
+        nomeLabel.setBounds(100, 0, 200, 60);
         JLabel emailLabel = new JLabel("Email");
         JLabel senhaLabel = new JLabel("Senha");
         JLabel enderecoLabel = new JLabel("Endereço");
@@ -45,13 +46,24 @@ public class Cadastro extends JFrame implements ActionListener {
 
         criar = new JButton("Criar Conta");
         criar.setFocusable(false);
-        criar.setBackground(Color.gray);
+        criar.setBackground(Color.cyan);
+        criar.setForeground(Color.WHITE);
         criar.setVerticalAlignment(JButton.CENTER);
         criar.setHorizontalAlignment(JButton.CENTER);
         criar.addActionListener(this);
+        criar.setPreferredSize(new Dimension(100, 30));
+
+        voltar = new JButton("Voltar");
+        voltar.setFocusable(false);
+        voltar.setBackground(Color.cyan);
+        voltar.setForeground(Color.WHITE);
+        voltar.setVerticalAlignment(JButton.CENTER);
+        voltar.setHorizontalAlignment(JButton.CENTER);
+        voltar.addActionListener(this);
+        voltar.setPreferredSize(new Dimension(100, 30));
 
         JPanel container = new JPanel();
-        container.setLayout(new GridLayout(4,4));
+        container.setLayout(new GridLayout(5, 5));
         container.add(nomeLabel);
         container.add(campoNome);
         container.add(emailLabel);
@@ -69,14 +81,18 @@ public class Cadastro extends JFrame implements ActionListener {
         container.add(dataNascimentoLabel);
         container.add(campoData);
 
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(voltar);
+        buttonPanel.add(criar);
+
         JLabel cadastroTitle = new JLabel();
         cadastroTitle.setFont(new Font(null, Font.BOLD, 20));
         cadastroTitle.setText("Cadastro");
-        cadastroTitle.setSize(100,100);
+        cadastroTitle.setSize(100, 100);
         cadastroTitle.setVerticalAlignment(JLabel.CENTER);
         cadastroTitle.setHorizontalAlignment(JLabel.CENTER);
 
-        setLayout(new GridLayout(3, 1));
+        setLayout(new BorderLayout());
         setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -85,11 +101,13 @@ public class Cadastro extends JFrame implements ActionListener {
                 e.getWindow().dispose();
             }
         });
-        add(cadastroTitle);
-        add(container);
-        add(criar);
+        add(cadastroTitle, BorderLayout.NORTH);
+        add(container, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
         pack();
         setVisible(true);
+
+
     }
 
     public static ArrayList<Conta> getCadastros() {
@@ -98,44 +116,44 @@ public class Cadastro extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == criar) {
+            String nome = campoNome.getText();
+            String email = campoEmail.getText();
+            String senha = campoSenha.getText();
+            String endereco = campoEndereco.getText();
+            String telefone = campoTelefone.getText();
+            String passaporte = campoPassaporte.getText();
+            String cpf = campoCpf.getText();
+            Date dataNascimento = null;
 
-        String nome = campoNome.getText();
-        String email = campoEmail.getText();
-        String senha = campoSenha.getText();
-        String endereco = campoEndereco.getText();
-        String telefone = campoTelefone.getText();
-        String passaporte = campoPassaporte.getText();
-        String cpf = campoCpf.getText();
-        Date dataNascimento = null;
-        
-        try {
+            try {
+                SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+                String dataNascimentoStr = campoData.getText();
+                dataNascimento = formatoData.parse(dataNascimentoStr);
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(null, "Formato de data incorreto!", "Erro!", JOptionPane.WARNING_MESSAGE);
+            }
 
-            SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
-            String dataNascimentoStr = campoData.getText();
-            dataNascimento = formatoData.parse(dataNascimentoStr);
-        }
-        catch (ParseException ex) {
-            JOptionPane.showMessageDialog(null, "Formato de data incorreto!","Erro!",JOptionPane.WARNING_MESSAGE );
-        }
+            if (!EmailValidator.isValidEmail(email)) {
+                JOptionPane.showMessageDialog(this, "Email inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
+            if (!telefone.matches("^\\d+$")) {
+                JOptionPane.showMessageDialog(this, "Telefone inválido! Apenas números são permitidos.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        if (!EmailValidator.isValidEmail(email)) {
-            JOptionPane.showMessageDialog(this, "Email inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+            if (!CPFValidator.isValidCPF(cpf)) {
+                JOptionPane.showMessageDialog(this, "CPF inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-        if (!telefone.matches("^\\d+$")) {
-            JOptionPane.showMessageDialog(this, "Telefone inválido! Apenas números são permitidos.", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!CPFValidator.isValidCPF(cpf)) {
-            JOptionPane.showMessageDialog(this, "CPF inválido!", "Erro", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        cadastros.add(new Conta(nome, email, senha, endereco, telefone, passaporte, cpf, dataNascimento));
-        new FirstFrame();
-        dispose();
-
+            cadastros.add(new Conta(nome, email, senha, endereco, telefone, passaporte, cpf, dataNascimento));
+            new FirstFrame();
+            dispose();
+        } else if (e.getSource() == voltar) {
+            new FirstFrame();
+            dispose();
+        } }
     }
-}

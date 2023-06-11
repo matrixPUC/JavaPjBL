@@ -36,14 +36,14 @@ public class FirstFrame extends JFrame implements ActionListener {
         mainTitle.setFont(new Font(null, Font.BOLD, 40));
         mainTitle.setVerticalAlignment(JLabel.CENTER);
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
-        mainTitle.setForeground(Color.white); // Define a cor do texto como vermelho
+        mainTitle.setForeground(Color.white);
 
         frame = new JFrame();
         frame.setTitle("Reserva de Voos");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLayout(new GridLayout(2, 1));
-        frame.getContentPane().setBackground(Color.CYAN); // Define a cor de fundo da janela como cinza claro
+        frame.getContentPane().setBackground(Color.CYAN);
         frame.add(mainTitle);
         frame.add(buttonContainer);
         frame.setVisible(true);
