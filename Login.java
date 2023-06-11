@@ -6,45 +6,53 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Login extends JFrame implements ActionListener {
-    JButton confirma;
+    private JButton confirma;
+    private JButton voltar;
     private static Conta contaLogada;
     private JTextField campoEmail;
-    private JTextField campoSenha;
+    private JPasswordField campoSenha;
 
-    public Login () {
+    public Login() {
 
-        JLabel emailLabel = new JLabel("Email");
-        emailLabel.setBounds(100,0,250,50);
-        JLabel senhaLabel = new JLabel("Senha");
+        JLabel emailLabel = new JLabel("Email:");
+        JLabel senhaLabel = new JLabel("Senha:");
 
-        campoEmail = new JTextField(20);
-        campoSenha = new JTextField(20);
+        campoEmail = new JTextField(10);
+        campoSenha = new JPasswordField(10);
 
         confirma = new JButton("Confirmar");
         confirma.setFocusable(false);
-        confirma.setBackground(Color.gray);
-        confirma.setVerticalAlignment(JButton.CENTER);
-        confirma.setHorizontalAlignment(JButton.CENTER);
         confirma.addActionListener(this);
+        confirma.setPreferredSize(new Dimension(100, 70));
 
-        JLabel buttonContainer = new JLabel();
-        buttonContainer.add(confirma);
+        voltar = new JButton("Voltar");
+        voltar.setFocusable(false);
+        voltar.addActionListener(this);
+        voltar.setPreferredSize(new Dimension(120, 30));
 
         JPanel container = new JPanel();
-        container.setLayout(new GridLayout(2,2));
+        container.setLayout(new GridLayout(2, 2));
         container.add(emailLabel);
         container.add(campoEmail);
         container.add(senhaLabel);
         container.add(campoSenha);
 
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
+        buttonPanel.add(voltar);
+        buttonPanel.add(confirma);
+
         JLabel loginTitle = new JLabel();
-        loginTitle.setFont(new Font(null, Font.BOLD, 20));
+        loginTitle.setFont(new Font(null, Font.BOLD, 50));
         loginTitle.setText("Login");
-        loginTitle.setSize(100,100);
+        loginTitle.setForeground(Color.black);
         loginTitle.setVerticalAlignment(JLabel.CENTER);
         loginTitle.setHorizontalAlignment(JLabel.CENTER);
 
-        setLayout(new GridLayout(3, 1));
+        Font labelFont = new Font(null, Font.PLAIN, 30);
+        emailLabel.setFont(labelFont);
+        senhaLabel.setFont(labelFont);
+
+        setLayout(new BorderLayout());
         setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -53,36 +61,42 @@ public class Login extends JFrame implements ActionListener {
                 e.getWindow().dispose();
             }
         });
-        add(loginTitle);
-        add(container);
-        add(confirma);
-        pack();
+        add(loginTitle, BorderLayout.NORTH);
+        add(container, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Aumenta a tela para ocupar toda a tela do computador
         setVisible(true);
     }
+
     public Conta getContaLogada() {
         return contaLogada;
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == confirma) {
+            String email = campoEmail.getText();
+            String senha = new String(campoSenha.getPassword());
 
-        String email = campoEmail.getText();
-        String senha = campoSenha.getText();
-
-        for (int i = 0; i < Cadastro.getCadastros().size(); i++) {
-            if (email.equals(Cadastro.getCadastros().get(i).getEmail())) {
-                if(senha.equals(Cadastro.getCadastros().get(i).getSenha())) {
-                    contaLogada = Cadastro.getCadastros().get(i);
-                    new ReservaVoo();
-                    dispose();
-                }
-                else {
-                    JOptionPane.showMessageDialog(null, "Senha Inválida!", "Erro!", JOptionPane.WARNING_MESSAGE);
+            for (Conta conta : Cadastro.getCadastros()) {
+                if (email.equals(conta.getEmail())) {
+                    if (senha.equals(conta.getSenha())) {
+                        contaLogada = conta;
+                        new ReservaVoo();
+                        dispose();
+                        return;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Senha Inválida!", "Erro!", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
                 }
             }
-            else {
-                JOptionPane.showMessageDialog(null, "Email Inválido!", "Erro!", JOptionPane.WARNING_MESSAGE);
-            }
+
+            JOptionPane.showMessageDialog(null, "Email Inválido!", "Erro!", JOptionPane.WARNING_MESSAGE);
+        } else if (e.getSource() == voltar) {
+            new FirstFrame();
+            dispose();
         }
-
     }
 }

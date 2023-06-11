@@ -11,7 +11,8 @@ import java.text.SimpleDateFormat;
 
 public class Cadastro extends JFrame implements ActionListener {
     private static ArrayList<Conta> cadastros;
-    JButton criar;
+    private JButton criar;
+    private JButton voltar;
     private JTextField campoNome;
     private JTextField campoEmail;
     private JTextField campoSenha;
@@ -22,10 +23,11 @@ public class Cadastro extends JFrame implements ActionListener {
     private JTextField campoData;
 
     public Cadastro() {
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Preenche toda a tela
         cadastros = new ArrayList<>();
 
         JLabel nomeLabel = new JLabel("Nome");
-        nomeLabel.setBounds(100,0,200,60);
+        nomeLabel.setBounds(100, 0, 200, 60);
         JLabel emailLabel = new JLabel("Email");
         JLabel senhaLabel = new JLabel("Senha");
         JLabel enderecoLabel = new JLabel("Endereço");
@@ -50,8 +52,15 @@ public class Cadastro extends JFrame implements ActionListener {
         criar.setHorizontalAlignment(JButton.CENTER);
         criar.addActionListener(this);
 
+        voltar = new JButton("Voltar");
+        voltar.setFocusable(false);
+        voltar.setBackground(Color.gray);
+        voltar.setVerticalAlignment(JButton.CENTER);
+        voltar.setHorizontalAlignment(JButton.CENTER);
+        voltar.addActionListener(this);
+
         JPanel container = new JPanel();
-        container.setLayout(new GridLayout(4,4));
+        container.setLayout(new GridLayout(4, 4));
         container.add(nomeLabel);
         container.add(campoNome);
         container.add(emailLabel);
@@ -70,9 +79,9 @@ public class Cadastro extends JFrame implements ActionListener {
         container.add(campoData);
 
         JLabel cadastroTitle = new JLabel();
-        cadastroTitle.setFont(new Font(null, Font.BOLD, 20));
+        cadastroTitle.setFont(new Font(null, Font.BOLD, 45));
         cadastroTitle.setText("Cadastro");
-        cadastroTitle.setSize(100,100);
+        cadastroTitle.setSize(100, 100);
         cadastroTitle.setVerticalAlignment(JLabel.CENTER);
         cadastroTitle.setHorizontalAlignment(JLabel.CENTER);
 
@@ -87,8 +96,15 @@ public class Cadastro extends JFrame implements ActionListener {
         });
         add(cadastroTitle);
         add(container);
-        add(criar);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.add(criar);
+        buttonPanel.add(voltar);
+        add(buttonPanel);
+
         pack();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
     }
 
@@ -107,7 +123,7 @@ public class Cadastro extends JFrame implements ActionListener {
         String passaporte = campoPassaporte.getText();
         String cpf = campoCpf.getText();
         Date dataNascimento = null;
-        
+
         try {
 
             SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
