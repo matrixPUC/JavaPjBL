@@ -11,13 +11,20 @@ public class FirstFrame extends JFrame implements ActionListener {
     public FirstFrame() {
         loginButton = new JButton("Login");
         loginButton.setFocusable(false);
-        loginButton.setBackground(Color.gray);
+        Color buttonColor = new Color(0, 255, 255);
+        loginButton.setBackground(buttonColor);
+        loginButton.setForeground(Color.WHITE);
+        loginButton.setPreferredSize(new Dimension(200, 100));
         loginButton.addActionListener(this);
+
 
         cadastroButton = new JButton("Cadastro");
         cadastroButton.setFocusable(false);
-        cadastroButton.setBackground(Color.gray);
+        cadastroButton.setBackground(buttonColor);
+        cadastroButton.setForeground(Color.WHITE);
+        cadastroButton.setPreferredSize(new Dimension(200, 100));
         cadastroButton.addActionListener(this);
+
 
         JPanel buttonContainer = new JPanel();
         buttonContainer.setLayout(new FlowLayout());
@@ -29,13 +36,14 @@ public class FirstFrame extends JFrame implements ActionListener {
         mainTitle.setFont(new Font(null, Font.BOLD, 40));
         mainTitle.setVerticalAlignment(JLabel.CENTER);
         mainTitle.setHorizontalAlignment(JLabel.CENTER);
+        mainTitle.setForeground(Color.white); // Define a cor do texto como vermelho
 
         frame = new JFrame();
         frame.setTitle("Reserva de Voos");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLayout(new GridLayout(2, 1));
-        frame.setBackground(Color.lightGray);
+        frame.getContentPane().setBackground(Color.CYAN); // Define a cor de fundo da janela como cinza claro
         frame.add(mainTitle);
         frame.add(buttonContainer);
         frame.setVisible(true);
