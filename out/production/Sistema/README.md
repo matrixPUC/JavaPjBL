@@ -62,3 +62,15 @@ Esses sistemas desempenham um papel crucial na operação das companhias aéreas
 
 ## Tela Inicial
 ![image](https://github.com/matrixPUC/JavaPjBL/assets/91105011/77a10f40-467e-4308-be4f-0c5191551b53)
+
+## Tela de Cadastro
+![image](https://github.com/matrixPUC/JavaPjBL/assets/91105011/187443d9-b7d2-4e0e-88fd-392ac3941f82)
+
+
+## Login 
+![image](https://github.com/matrixPUC/JavaPjBL/assets/91105011/6c539bec-2546-40aa-a435-9d28230d9ef7)
+
+
+
+## Reserva
+![image](https://github.com/matrixPUC/JavaPjBL/assets/91105011/71df5788-9631-40ba-a1ba-b3bffa0f2a69)
