@@ -13,44 +13,72 @@ public class Login extends JFrame implements ActionListener {
     private JPasswordField campoSenha;
 
     public Login() {
-
         JLabel emailLabel = new JLabel("Email:");
         JLabel senhaLabel = new JLabel("Senha:");
+        Color backgroundColor = new Color(214, 255, 255);
+        getContentPane().setBackground(backgroundColor);
 
-        campoEmail = new JTextField(10);
-        campoSenha = new JPasswordField(10);
+        campoEmail = new JTextField(30);
+        campoSenha = new JPasswordField(30);
+        campoEmail.setPreferredSize(new Dimension(campoEmail.getPreferredSize().width, 40));
+        campoSenha.setPreferredSize(new Dimension(campoSenha.getPreferredSize().width, 40));
+
+
 
         confirma = new JButton("Confirmar");
         confirma.setFocusable(false);
         confirma.addActionListener(this);
-        confirma.setPreferredSize(new Dimension(100, 70));
+        confirma.setPreferredSize(new Dimension(150, 50));
 
         voltar = new JButton("Voltar");
         voltar.setFocusable(false);
         voltar.addActionListener(this);
-        voltar.setPreferredSize(new Dimension(120, 30));
+        voltar.setPreferredSize(new Dimension(150, 50));
 
         JPanel container = new JPanel();
-        container.setLayout(new GridLayout(2, 2));
-        container.add(emailLabel);
-        container.add(campoEmail);
-        container.add(senhaLabel);
-        container.add(campoSenha);
+        container.setLayout(new GridBagLayout());
 
-        JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.WEST;
+        constraints.insets = new Insets(10, 10, 10, 10);
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        container.add(emailLabel, constraints);
+
+        constraints.gridx = 1;
+        container.add(campoEmail, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        container.add(senhaLabel, constraints);
+
+        constraints.gridx = 1;
+        container.add(campoSenha, constraints);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+
+        buttonPanel.add(voltar);
+        buttonPanel.add(confirma);
+
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+
+        container.add(buttonPanel, constraints);
+
         buttonPanel.add(voltar);
         buttonPanel.add(confirma);
 
         JLabel loginTitle = new JLabel();
         loginTitle.setFont(new Font(null, Font.BOLD, 50));
         loginTitle.setText("Login");
-        loginTitle.setForeground(Color.black);
+        loginTitle.setForeground(Color.BLACK);
         loginTitle.setVerticalAlignment(JLabel.CENTER);
         loginTitle.setHorizontalAlignment(JLabel.CENTER);
 
-        Font labelFont = new Font(null, Font.PLAIN, 30);
-        emailLabel.setFont(labelFont);
-        senhaLabel.setFont(labelFont);
+        // Define a cor de fundo do JPanel principal
+        container.setBackground(new Color(214, 255, 255));
 
         setLayout(new BorderLayout());
         setResizable(false);
@@ -65,7 +93,7 @@ public class Login extends JFrame implements ActionListener {
         add(container, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setExtendedState(JFrame.MAXIMIZED_BOTH); // Aumenta a tela para ocupar toda a tela do computador
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
     }
 
