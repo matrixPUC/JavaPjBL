@@ -5,7 +5,7 @@ public class VooInternacional extends Voo {
     private String paisDestino;
     private boolean necessitaVisto;
 
-    public VooInternacional(String numeroVoo, Aeroporto origemVoo, Aeroporto destinoVoo, String dataPartida, String dataChegada, CompanhiaAerea companhiaAerea, int capacidade, float tarifa, String paisOrigem, String paisDestino, boolean necessitaVisto) {
+    public VooInternacional(String numeroVoo, String origemVoo, String destinoVoo, String dataPartida, String dataChegada, String companhiaAerea, int capacidade, float tarifa, String paisOrigem, String paisDestino, boolean necessitaVisto) {
         super(numeroVoo, origemVoo, destinoVoo, dataPartida, dataChegada, companhiaAerea, capacidade, tarifa);
         this.paisOrigem = paisOrigem;
         this.paisDestino = paisDestino;
@@ -53,11 +53,5 @@ public class VooInternacional extends Voo {
         } else {
             System.out.println("Necessita de visto: Não");
         }
-    }
-
-    @Override
-    public void localizarVoo() {
-        // quando um novo voo é criado
-        // este voo é adicionado à lista de voos do aeroporto de origem
     }
 }

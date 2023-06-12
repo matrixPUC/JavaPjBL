@@ -1,16 +1,14 @@
-import java.util.ArrayList;
-
 public abstract class Voo {
     private String numeroVoo;
-    private Aeroporto origemVoo;
-    private Aeroporto destinoVoo;
+    private String origemVoo; // codIATAAeroporto
+    private String destinoVoo;
     private String dataPartida;
     private String dataChegada;
-    private CompanhiaAerea companhiaAerea;
+    private String companhiaAerea; // codIATACompanhia
     private int capacidade;
     private float tarifa;
 
-    public Voo(String numeroVoo, Aeroporto origemVoo, Aeroporto destinoVoo, String dataPartida, String dataChegada, CompanhiaAerea companhiaAerea, int capacidade, float tarifa) {
+    public Voo(String numeroVoo, String origemVoo, String destinoVoo, String dataPartida, String dataChegada, String companhiaAerea, int capacidade, float tarifa) {
         this.numeroVoo = numeroVoo;
         this.origemVoo = origemVoo;
         this.destinoVoo = destinoVoo;
@@ -29,19 +27,19 @@ public abstract class Voo {
         this.numeroVoo = numeroVoo;
     }
 
-    public Aeroporto getOrigemVoo() {
+    public String getOrigemVoo() {
         return origemVoo;
     }
 
-    public void setOrigemVoo(Aeroporto origemVoo) {
+    public void setOrigemVoo(String origemVoo) {
         this.origemVoo = origemVoo;
     }
 
-    public Aeroporto getDestinoVoo() {
+    public String getDestinoVoo() {
         return destinoVoo;
     }
 
-    public void setDestinoVoo(Aeroporto destinoVoo) {
+    public void setDestinoVoo(String destinoVoo) {
         this.destinoVoo = destinoVoo;
     }
 
@@ -61,11 +59,11 @@ public abstract class Voo {
         this.dataChegada = dataChegada;
     }
 
-    public CompanhiaAerea getCompanhiaAerea() {
+    public String getCompanhiaAerea() {
         return companhiaAerea;
     }
 
-    public void setCompanhiaAerea(CompanhiaAerea companhiaAerea) {
+    public void setCompanhiaAerea(String companhiaAerea) {
         this.companhiaAerea = companhiaAerea;
     }
 
@@ -86,7 +84,5 @@ public abstract class Voo {
     }
 
     public abstract void exibirInformacoes();
-
-    public abstract void localizarVoo();
 }
 

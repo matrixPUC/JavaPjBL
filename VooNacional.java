@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class VooNacional extends Voo {
     private double taxaDomestica;
 
-    public VooNacional(String numeroVoo, Aeroporto origemVoo, Aeroporto destinoVoo, String dataPartida, String dataChegada, CompanhiaAerea companhiaAerea, int capacidade, float tarifa, double taxaDomestica) {
+    public VooNacional(String numeroVoo, String origemVoo, String destinoVoo, String dataPartida, String dataChegada, String companhiaAerea, int capacidade, float tarifa, double taxaDomestica) {
         super(numeroVoo, origemVoo, destinoVoo, dataPartida, dataChegada, companhiaAerea, capacidade, tarifa);
         this.taxaDomestica = taxaDomestica;
     }
@@ -26,11 +26,5 @@ public class VooNacional extends Voo {
         System.out.println("Companhia Aérea: " + getCompanhiaAerea());
         System.out.println("Capacidade: " + getCapacidade());
         System.out.println("Tarifa: " + getTarifa());
-    }
-
-    @Override
-    public void localizarVoo() {
-        // quando um novo voo é criado
-        // este voo é adicionado à lista de voos do aeroporto de origem
     }
 }

@@ -1,0 +1,10 @@
+"NH1449";curitiba;tokyo;"30/05/2023";"31/05/2023";allNipponAirways;750;19850.00f;"BR";"JP";true
+"G31255";guarulhos;unitedstates;"26/06/2023";"27/06/2023";gol;700;3983.50f;"BR";"US";false
+"AD2145";galeao;tokyo;"25/08/2023";"26/08/2023";azul;680;13345.00f;"BR";"JP";true
+"QR1689";curitiba;qatar;"29/10/2023";"30/10/2023";qatarAirways;953;21088.95f;"BR";"QA";true
+"AF0520";guarulhos;paris;"02/07/2023";"03/07/2023";airFrance;554;9876.52f;"BR";"FR";false
+"JJ3566";curitiba;guarulhos;"31/10/2023";"31/10/2023";latam;250;765.00f;50.45f
+"G31236";guarulhos;curitiba;"27/07/2023";"28/07/2023";gol;295;685.00f;48.46f
+"AD2450";guarulhos;galeao;"26/09/2023";"26/09/2023";azul;350;1368.56f;65.45f
+"AD5299";galeao;curitiba;"30/06/2023";"30/06/2023";azul;325;3982.79f;25.56f
+"JJ3999";galeao;guarulhos;"03/08/2023";"03/08/2023";latam;300;1246.96f;69.22f

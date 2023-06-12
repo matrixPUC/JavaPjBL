@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ReservaVoo extends JFrame implements ActionListener {
     private static CardLayout card = new CardLayout(0, 0);
@@ -60,8 +61,8 @@ public class ReservaVoo extends JFrame implements ActionListener {
             });
             if (voo instanceof VooInternacional) {
                 info.setText("Número do Voo: " + voo.getNumeroVoo());
-                info.append("\nOrigem: " + ((VooInternacional) voo).getPaisOrigem() + ", " + voo.getOrigemVoo().getNome());
-                info.append("\nDestino: " + ((VooInternacional) voo).getPaisDestino() + ", " + voo.getDestinoVoo().getNome());
+                info.append("\nOrigem: " + ((VooInternacional) voo).getPaisOrigem() + ", " + voo.getOrigemVoo());
+                info.append("\nDestino: " + ((VooInternacional) voo).getPaisDestino() + ", " + voo.getDestinoVoo());
                 info.append("\nCompanhia: " + voo.getCompanhiaAerea() + " | Capacidade: " + voo.getCapacidade() + " | Tarifa: " + voo.getTarifa());
                 info.append("\nData de Partida: " + voo.getDataPartida() + " | Data de Chegada: " + voo.getDataChegada());
                 if (((VooInternacional) voo).isNecessitaVisto()) {
@@ -71,8 +72,8 @@ public class ReservaVoo extends JFrame implements ActionListener {
             }
             else {
                 info.setText("Número do Voo: " + voo.getNumeroVoo());
-                info.append("\nOrigem: " + voo.getOrigemVoo().getNome());
-                info.append("\nDestino: " + voo.getDestinoVoo().getNome());
+                info.append("\nOrigem: " + voo.getOrigemVoo());
+                info.append("\nDestino: " + voo.getDestinoVoo());
                 info.append("\nCompanhia: " + voo.getCompanhiaAerea() + " | Capacidade: " + voo.getCapacidade());
                 info.append("\nTarifa: " + voo.getTarifa() + " | Taxa Doméstica: " + ((VooNacional) voo).getTaxaDomestica());
                 info.append("\nData de Partida: " + voo.getDataPartida() + " | Data de Chegada: " + voo.getDataChegada());
@@ -104,7 +105,6 @@ public class ReservaVoo extends JFrame implements ActionListener {
         setVisible(true);
 
         reservasB.setEnabled(false);
-
     }
 
     private void construirPanelReservas() {
@@ -115,14 +115,14 @@ public class ReservaVoo extends JFrame implements ActionListener {
             JTextArea infoReserva = new JTextArea();
             if (voo instanceof VooInternacional) {
                 infoReserva.setText("Número do Voo: " + voo.getNumeroVoo());
-                infoReserva.append("\nOrigem: " + voo.getOrigemVoo().getNome());
-                infoReserva.append("\nDestino: " + ((VooInternacional) voo).getPaisDestino() + ", " + voo.getDestinoVoo().getNome());
+                infoReserva.append("\nOrigem: " + voo.getOrigemVoo());
+                infoReserva.append("\nDestino: " + ((VooInternacional) voo).getPaisDestino() + ", " + voo.getDestinoVoo());
                 infoReserva.append("\nData de Partida: " + voo.getDataPartida() + " | Data de Chegada: " + voo.getDataChegada());
             }
             else {
                 infoReserva.setText("Número do Voo: " + voo.getNumeroVoo());
-                infoReserva.append("\nOrigem: " + voo.getOrigemVoo().getNome());
-                infoReserva.append("\nDestino: " + voo.getDestinoVoo().getNome());
+                infoReserva.append("\nOrigem: " + voo.getOrigemVoo());
+                infoReserva.append("\nDestino: " + voo.getDestinoVoo());
                 infoReserva.append("\nData de Partida: " + voo.getDataPartida() + " | Data de Chegada: " + voo.getDataChegada());
             }
             infoReserva.setEditable(false);
@@ -132,6 +132,7 @@ public class ReservaVoo extends JFrame implements ActionListener {
         reserva.revalidate();
         reserva.repaint();
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Minhas Reservas")) {
@@ -151,6 +152,4 @@ public class ReservaVoo extends JFrame implements ActionListener {
             card.next(voos);
         }
     }
-
-
 }

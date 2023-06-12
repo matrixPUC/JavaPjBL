@@ -4,17 +4,11 @@ public class Aeroporto {
     private String nome;
     private String endereco;
     private String codIATAAeroporto;
-//    private ArrayList<Voo> voosAeroporto;
-//    private ArrayList<VooNacional> voosNacionais;
-//    private ArrayList<VooInternacional> voosInternacionais;
 
-    public Aeroporto(String nome, String endereco, String codIATAAeroporto/* ArrayList<Voo> voosAeroporto/*, ArrayList<VooNacional> voosNacionais, ArrayList<VooInternacional> voosInternacionais*/) {
+    public Aeroporto(String nome, String endereco, String codIATAAeroporto) {
         this.nome = nome;
         this.endereco = endereco;
         this.codIATAAeroporto = codIATAAeroporto;
-//        this.voosAeroporto = voosAeroporto;
-//        this.voosNacionais = voosNacionais;
-//        this.voosInternacionais = voosInternacionais;
     }
 
     public String getNome() {
@@ -40,35 +34,4 @@ public class Aeroporto {
     public void setCodIATAAeroporto(String codIATAAeroporto) {
         this.codIATAAeroporto = codIATAAeroporto;
     }
-
-//    public ArrayList<Voo> getVoosAeroporto() {
-//        return voosAeroporto;
-//    }
-
-//    public void setVoosAeroporto(ArrayList<Voo> voosAeroporto) {
-//        this.voosAeroporto = voosAeroporto;
-//    }
-
-    //    public ArrayList<VooNacional> getVoosNacionais() {
-//        return voosNacionais;
-//    }
-//
-//    public void setVoosNacionais(ArrayList<VooNacional> voosNacionais) {
-//        this.voosNacionais = voosNacionais;
-//    }
-//
-//    public ArrayList<VooInternacional> getVoosInternacionais() {
-//        return voosInternacionais;
-//    }
-//
-//    public void setVoosInternacionais(ArrayList<VooInternacional> voosInternacionais) {
-//        this.voosInternacionais = voosInternacionais;
-//    }
-//
-//    public void inserirVooNacional (VooNacional vooNacional) {
-//        voosNacionais.add(vooNacional);
-//    }
-//    public void inserirVooInternacional (VooInternacional vooInternacional) {
-//        voosInternacionais.add(vooInternacional);
-//    }
 }
