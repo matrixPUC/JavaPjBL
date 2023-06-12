@@ -1,72 +1,156 @@
 
 import javax.swing.*;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ReservaVoo extends JFrame implements ActionListener {
-    private JTextField campoNome;
-    private JTextField campoOrigem;
-    private JTextField campoDestino;
-    private JTextField campoDataIda;
-    private JTextField campoDataVolta;
+    private static CardLayout card = new CardLayout(0, 0);
+    private JPanel mainFrame = new JPanel();
+    JButton reservasB, voosB;
+    JPanel voos, reserva;
+    Voo vooAtual;
 
     public ReservaVoo() {
-        // Configurações da janela
+        JLabel bemvindo = new JLabel("Bem-vindo, " + Login.getContaLogada().getNome());
+        bemvindo.setSize(200, 100);
+
+        reservasB = new JButton("Minhas Reservas");
+        reservasB.addActionListener(this);
+        voosB = new JButton("Realizar Reservas");
+        voosB.addActionListener(this);
+
+        JPanel sideFrame = new JPanel();
+        sideFrame.setSize(200, 600);
+        sideFrame.setLayout(new BoxLayout(sideFrame, BoxLayout.Y_AXIS));
+        sideFrame.add(bemvindo);
+        sideFrame.add(reservasB);
+        sideFrame.add(voosB);
+
+        reserva = new JPanel();
+        reserva.setLayout(new BoxLayout(reserva, BoxLayout.Y_AXIS));
+        reserva.setSize(400, 600);
+        construirPanelReservas();
+
+        voos = new JPanel();
+        voos.setLayout(card);
+        voos.setSize(400, 600);
+        for (Voo voo : ColecaoVoos.getVoos()) {
+            vooAtual = voo;
+            JPanel panelVoo = new JPanel();
+            panelVoo.setLayout(new BoxLayout(panelVoo, BoxLayout.Y_AXIS));
+            JTextArea info = new JTextArea();
+            info.setSize(300, 300);
+            JPanel botoes = new JPanel();
+            JButton ant = new JButton("Anterior");
+            ant.addActionListener(this);
+            JButton prox = new JButton("Próximo");
+            prox.addActionListener(this);
+            JButton criar = new JButton("Criar Reserva");
+            criar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (Login.getContaLogada().getReservas().contains(voo)) {
+                        JOptionPane.showMessageDialog(null, "Uma reserva nesse voo já foi efetuada", "Erro!", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        Login.getContaLogada().addReserva(voo);
+                        JOptionPane.showMessageDialog(null, "Reserva realizada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                        construirPanelReservas();
+                    }
+                }
+            });
+            if (voo instanceof VooInternacional) {
+                info.setText("Número do Voo: " + voo.getNumeroVoo());
+                info.append("\nOrigem: " + ((VooInternacional) voo).getPaisOrigem() + ", " + voo.getOrigemVoo().getNome());
+                info.append("\nDestino: " + ((VooInternacional) voo).getPaisDestino() + ", " + voo.getDestinoVoo().getNome());
+                info.append("\nCompanhia: " + voo.getCompanhiaAerea() + " | Capacidade: " + voo.getCapacidade() + " | Tarifa: " + voo.getTarifa());
+                info.append("\nData de Partida: " + voo.getDataPartida() + " | Data de Chegada: " + voo.getDataChegada());
+                if (((VooInternacional) voo).isNecessitaVisto()) {
+                    info.append("\nVisto Necessário");
+                }
+
+            }
+            else {
+                info.setText("Número do Voo: " + voo.getNumeroVoo());
+                info.append("\nOrigem: " + voo.getOrigemVoo().getNome());
+                info.append("\nDestino: " + voo.getDestinoVoo().getNome());
+                info.append("\nCompanhia: " + voo.getCompanhiaAerea() + " | Capacidade: " + voo.getCapacidade());
+                info.append("\nTarifa: " + voo.getTarifa() + " | Taxa Doméstica: " + ((VooNacional) voo).getTaxaDomestica());
+                info.append("\nData de Partida: " + voo.getDataPartida() + " | Data de Chegada: " + voo.getDataChegada());
+            }
+            botoes.setLayout(new BoxLayout(botoes, BoxLayout.X_AXIS));
+            botoes.add(ant);
+            botoes.add(prox);
+            info.setEditable(false);
+            panelVoo.add(info);
+            panelVoo.add(criar);
+            panelVoo.add(botoes);
+            voos.add(panelVoo);
+        }
+
+        mainFrame.setLayout(card);
+        mainFrame.add(reserva);
+        mainFrame.add(voos);
+
+        JPanel frame = new JPanel();
+        frame.setLayout(new BoxLayout(frame, BoxLayout.X_AXIS));
+        frame.add(sideFrame);
+        frame.add(mainFrame);
+        frame.setSize(600,600);
+
         setTitle("Reserva de Voo");
-        setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(6, 2));
+        add(frame);
+        pack();
         setVisible(true);
 
-        // Componentes da interface
-        JLabel labelNome = new JLabel("Nome:");
+        reservasB.setEnabled(false);
 
-        labelNome.setBounds(100, 100, 250, 40);
-        campoNome = new JTextField(20);
-        JLabel labelOrigem = new JLabel("Origem:");
-        campoOrigem = new JTextField(20);
-        JLabel labelDestino = new JLabel("Destino:");
-        campoDestino = new JTextField(20);
-        JLabel labelDataIda = new JLabel("Data de Ida:");
-        campoDataIda = new JTextField(20);
-        JLabel labelDataVolta = new JLabel("Data de Volta:");
-        campoDataVolta = new JTextField(20);
-        JButton botaoReservar = new JButton("Reservar");
-
-
-        // Adiciona os componentes à janela
-        add(labelNome);
-        add(campoNome);
-        add(labelOrigem);
-        add(campoOrigem);
-        add(labelDestino);
-        add(campoDestino);
-        add(labelDataIda);
-        add(campoDataIda);
-        add(labelDataVolta);
-        add(campoDataVolta);
-        add(botaoReservar);
-
-        // Define o ActionListener para o botão
-        botaoReservar.addActionListener(this);
     }
 
+    private void construirPanelReservas() {
+        reserva.removeAll();
+        for (Voo voo : Login.getContaLogada().getReservas()) {
+            JPanel reservasCriadas = new JPanel();
+            reservasCriadas.setLayout(new BorderLayout());
+            JTextArea infoReserva = new JTextArea();
+            if (voo instanceof VooInternacional) {
+                infoReserva.setText("Número do Voo: " + voo.getNumeroVoo());
+                infoReserva.append("\nOrigem: " + voo.getOrigemVoo().getNome());
+                infoReserva.append("\nDestino: " + ((VooInternacional) voo).getPaisDestino() + ", " + voo.getDestinoVoo().getNome());
+                infoReserva.append("\nData de Partida: " + voo.getDataPartida() + " | Data de Chegada: " + voo.getDataChegada());
+            }
+            else {
+                infoReserva.setText("Número do Voo: " + voo.getNumeroVoo());
+                infoReserva.append("\nOrigem: " + voo.getOrigemVoo().getNome());
+                infoReserva.append("\nDestino: " + voo.getDestinoVoo().getNome());
+                infoReserva.append("\nData de Partida: " + voo.getDataPartida() + " | Data de Chegada: " + voo.getDataChegada());
+            }
+            infoReserva.setEditable(false);
+            reservasCriadas.add(infoReserva, BorderLayout.WEST);
+            reserva.add(reservasCriadas);
+        }
+        reserva.revalidate();
+        reserva.repaint();
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
-        // Lógica para lidar com o evento de clique no botão
-        String nome = campoNome.getText();
-        String origem = campoOrigem.getText();
-        String destino = campoDestino.getText();
-        String dataIda = campoDataIda.getText();
-        String dataVolta = campoDataVolta.getText();
-
-        // Aqui, você pode implementar a lógica de reserva de voo com base nos dados fornecidos
-
-
-        // Exemplo: exibindo uma mensagem com os detalhes da reserva
-        String mensagem = "Reserva de voo para:\nNome: " + nome + "\nOrigem: " + origem + "\nDestino: " + destino + "\nData de ida: " + dataIda + "\nData de volta: " + dataVolta;
-        JOptionPane.showMessageDialog(this, mensagem);
+        if (e.getActionCommand().equals("Minhas Reservas")) {
+            card.first(mainFrame);
+            reservasB.setEnabled(false);
+            voosB.setEnabled(true);
+        }
+        if (e.getActionCommand().equals("Realizar Reservas")) {
+            card.last(mainFrame);
+            voosB.setEnabled(false);
+            reservasB.setEnabled(true);
+        }
+        if (e.getActionCommand().equals("Anterior")) {
+            card.previous(voos);
+        }
+        if (e.getActionCommand().equals("Próximo")) {
+            card.next(voos);
+        }
     }
 
 

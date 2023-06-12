@@ -59,7 +59,7 @@ public class Login extends JFrame implements ActionListener {
         pack();
         setVisible(true);
     }
-    public Conta getContaLogada() {
+    public static Conta getContaLogada() {
         return contaLogada;
     }
     @Override
