@@ -11,7 +11,7 @@ import javax.swing.text.MaskFormatter;
 
 public class Cadastro extends JFrame implements ActionListener {
     private static ArrayList<Conta> cadastros = new ArrayList<>();
-    JButton criar;
+    JButton criar; JButton voltar;
     private JTextField campoNome;
     private JTextField campoEmail;
     private JPasswordField campoSenha;
@@ -23,16 +23,34 @@ public class Cadastro extends JFrame implements ActionListener {
 
     public Cadastro() {
         cadastros = new ArrayList<>();
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Preenche toda a tela
+        Color backgroundColor = new Color(214, 255, 255);
+        getContentPane().setBackground(backgroundColor);
 
         JLabel nomeLabel = new JLabel("Nome");
-        nomeLabel.setBounds(100, 0, 200, 60);
+        nomeLabel.setFont(nomeLabel.getFont().deriveFont(Font.BOLD, 18));
+        nomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         JLabel emailLabel = new JLabel("Email");
+        emailLabel.setFont(nomeLabel.getFont().deriveFont(Font.BOLD, 18));
+        emailLabel.setHorizontalAlignment(SwingConstants.CENTER);
         JLabel senhaLabel = new JLabel("Senha");
+        senhaLabel.setFont(nomeLabel.getFont().deriveFont(Font.BOLD, 18));
+        senhaLabel.setHorizontalAlignment(SwingConstants.CENTER);
         JLabel enderecoLabel = new JLabel("Endereço");
+        enderecoLabel.setFont(nomeLabel.getFont().deriveFont(Font.BOLD, 18));
+        enderecoLabel.setHorizontalAlignment(SwingConstants.CENTER);
         JLabel telefoneLabel = new JLabel("Telefone");
+        telefoneLabel.setFont(nomeLabel.getFont().deriveFont(Font.BOLD, 18));
+        telefoneLabel.setHorizontalAlignment(SwingConstants.CENTER);
         JLabel passaporteLabel = new JLabel("Passaporte");
+        passaporteLabel.setFont(nomeLabel.getFont().deriveFont(Font.BOLD, 18));
+        passaporteLabel.setHorizontalAlignment(SwingConstants.CENTER);
         JLabel cpfLabel = new JLabel("CPF");
+        cpfLabel.setFont(nomeLabel.getFont().deriveFont(Font.BOLD, 18));
+        cpfLabel.setHorizontalAlignment(SwingConstants.CENTER);
         JLabel dataNascimentoLabel = new JLabel("Data de Nascimento");
+        dataNascimentoLabel.setFont(nomeLabel.getFont().deriveFont(Font.BOLD, 18));
+        dataNascimentoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         campoNome = new JTextField(20);
         campoEmail = new JTextField(20);
@@ -46,13 +64,23 @@ public class Cadastro extends JFrame implements ActionListener {
 
         criar = new JButton("Criar Conta");
         criar.setFocusable(false);
-        criar.setBackground(Color.gray);
         criar.setVerticalAlignment(JButton.CENTER);
         criar.setHorizontalAlignment(JButton.CENTER);
         criar.addActionListener(this);
+        criar.setPreferredSize(new Dimension(300, 50));
+
+        voltar = new JButton("Voltar");
+        voltar.setFocusable(false);
+        voltar.setVerticalAlignment(JButton.CENTER);
+        voltar.setHorizontalAlignment(JButton.CENTER);
+        voltar.addActionListener(this);
+        voltar.setPreferredSize(new Dimension(300, 50));
 
         JPanel container = new JPanel();
-        container.setLayout(new GridLayout(4, 4));
+        container.setLayout(new GridLayout(8, 2, 10, 10));
+        container.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        container.setBackground(backgroundColor);
+
         container.add(nomeLabel);
         container.add(campoNome);
         container.add(emailLabel);
@@ -71,14 +99,15 @@ public class Cadastro extends JFrame implements ActionListener {
         container.add(campoData);
 
         JLabel cadastroTitle = new JLabel();
-        cadastroTitle.setFont(new Font(null, Font.BOLD, 20));
+        cadastroTitle.setFont(new Font(null, Font.BOLD, 40));
         cadastroTitle.setText("Cadastro");
-        cadastroTitle.setSize(100, 100);
         cadastroTitle.setVerticalAlignment(JLabel.CENTER);
         cadastroTitle.setHorizontalAlignment(JLabel.CENTER);
 
         setLayout(new GridLayout(3, 1));
         setResizable(false);
+
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
