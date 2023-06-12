@@ -16,19 +16,29 @@ public class ReservaVoo extends JFrame implements ActionListener {
         this.login = login;
 
         JLabel bemvindo = new JLabel("Bem-vindo, " + login.getContaLogada().getNome());
+        bemvindo.setFont(bemvindo.getFont().deriveFont(40f)); // Define o tamanho da fonte como 20
         bemvindo.setSize(200, 100);
 
         reservasB = new JButton("Minhas Reservas");
         reservasB.addActionListener(this);
+        reservasB.setFont(reservasB.getFont().deriveFont(20f)); // Define o tamanho da fonte do botão como 16
         voosB = new JButton("Realizar Reservas");
         voosB.addActionListener(this);
+        voosB.setFont(voosB.getFont().deriveFont(20f)); // Define o tamanho da fonte do botão como 16
 
         JPanel sideFrame = new JPanel();
         sideFrame.setSize(200, 600);
         sideFrame.setLayout(new BoxLayout(sideFrame, BoxLayout.Y_AXIS));
+        sideFrame.add(Box.createVerticalGlue()); // Adiciona espaço vertical flexível
         sideFrame.add(bemvindo);
+        bemvindo.setAlignmentX(Component.CENTER_ALIGNMENT); // Centraliza horizontalmente
+        sideFrame.add(Box.createVerticalGlue()); // Adiciona espaço vertical flexível
         sideFrame.add(reservasB);
+        reservasB.setAlignmentX(Component.CENTER_ALIGNMENT); // Centraliza horizontalmente
+        sideFrame.add(Box.createVerticalGlue()); // Adiciona espaço vertical flexível
         sideFrame.add(voosB);
+        voosB.setAlignmentX(Component.CENTER_ALIGNMENT); // Centraliza horizontalmente
+        sideFrame.add(Box.createVerticalGlue()); // Adiciona espaço vertical flexível
 
         reserva = new JPanel();
         reserva.setLayout(new BoxLayout(reserva, BoxLayout.Y_AXIS));
@@ -90,23 +100,38 @@ public class ReservaVoo extends JFrame implements ActionListener {
         }
 
         mainFrame.setLayout(card);
+        mainFrame.setBackground(new Color(214, 255, 255));
         mainFrame.add(reserva);
         mainFrame.add(voos);
 
-        JPanel frame = new JPanel();
-        frame.setLayout(new BoxLayout(frame, BoxLayout.X_AXIS));
-        frame.add(sideFrame);
-        frame.add(mainFrame);
-        frame.setSize(600,600);
+        JPanel frame = new JPanel(new GridBagLayout());
+        frame.setBackground(new Color(214, 255, 255)); // Define a cor de fundo do painel frame
+        frame.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Define margens
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 0.3;
+        constraints.fill = GridBagConstraints.VERTICAL;
+        frame.add(sideFrame, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 0;
+        constraints.weightx = 0.7;
+        constraints.fill = GridBagConstraints.BOTH;
+        frame.add(mainFrame, constraints);
+
 
         setTitle("Reserva de Voo");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         add(frame);
-        pack();
         setVisible(true);
 
         reservasB.setEnabled(false);
+
     }
+
 
     private void construirPanelReservas() {
         reserva.removeAll();

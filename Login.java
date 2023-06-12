@@ -6,45 +6,82 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class Login extends JFrame implements ActionListener {
-    JButton confirma;
+    private JButton confirma;
+    private JButton voltar;
     private static Conta contaLogada;
     private JTextField campoEmail;
     private JPasswordField campoSenha;
 
-    public Login () {
+    public Login() {
+        JLabel emailLabel = new JLabel("Email:");
+        JLabel senhaLabel = new JLabel("Senha:");
+        Color backgroundColor = new Color(214, 255, 255);
+        getContentPane().setBackground(backgroundColor);
 
-        JLabel emailLabel = new JLabel("Email");
-        emailLabel.setBounds(100,0,250,50);
-        JLabel senhaLabel = new JLabel("Senha");
-
-        campoEmail = new JTextField(20);
-        campoSenha = new JPasswordField(20);
+        campoEmail = new JTextField(30);
+        campoSenha = new JPasswordField(30);
+        campoEmail.setPreferredSize(new Dimension(campoEmail.getPreferredSize().width, 40));
+        campoSenha.setPreferredSize(new Dimension(campoSenha.getPreferredSize().width, 40));
 
         confirma = new JButton("Confirmar");
         confirma.setFocusable(false);
-        confirma.setBackground(Color.green);
-        confirma.setVerticalAlignment(JButton.CENTER);
-        confirma.setHorizontalAlignment(JButton.CENTER);
         confirma.addActionListener(this);
+        confirma.setPreferredSize(new Dimension(150, 50));
 
-        JLabel buttonContainer = new JLabel();
-        buttonContainer.add(confirma);
+        voltar = new JButton("Voltar");
+        voltar.setFocusable(false);
+        voltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FirstFrame();
+                dispose();
+            }
+        });
+        voltar.setPreferredSize(new Dimension(150, 50));
 
         JPanel container = new JPanel();
-        container.setLayout(new GridLayout(2,2));
-        container.add(emailLabel);
-        container.add(campoEmail);
-        container.add(senhaLabel);
-        container.add(campoSenha);
+        container.setLayout(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.WEST;
+        constraints.insets = new Insets(10, 10, 10, 10);
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        container.add(emailLabel, constraints);
+
+        constraints.gridx = 1;
+        container.add(campoEmail, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        container.add(senhaLabel, constraints);
+
+        constraints.gridx = 1;
+        container.add(campoSenha, constraints);
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+
+        buttonPanel.add(voltar);
+        buttonPanel.add(confirma);
+
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+
+        container.add(buttonPanel, constraints);
 
         JLabel loginTitle = new JLabel();
-        loginTitle.setFont(new Font(null, Font.BOLD, 20));
+        loginTitle.setFont(new Font(null, Font.BOLD, 50));
         loginTitle.setText("Login");
-        loginTitle.setSize(100,100);
+        loginTitle.setForeground(Color.BLACK);
         loginTitle.setVerticalAlignment(JLabel.CENTER);
         loginTitle.setHorizontalAlignment(JLabel.CENTER);
 
-        setLayout(new GridLayout(3, 1));
+        // Define a cor de fundo do JPanel principal
+        container.setBackground(new Color(214, 255, 255));
+
+        setLayout(new BorderLayout());
         setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -53,16 +90,20 @@ public class Login extends JFrame implements ActionListener {
                 e.getWindow().dispose();
             }
         });
-        add(loginTitle);
-        add(container);
-        add(confirma);
-        pack();
+        add(loginTitle, BorderLayout.NORTH);
+        add(container, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
     }
 
     public Conta getContaLogada() {
         return contaLogada;
     }
+
+
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
