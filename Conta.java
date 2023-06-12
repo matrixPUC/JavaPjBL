@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Conta {
@@ -10,6 +11,7 @@ public class Conta {
     private String cpf;
     private Date dataNascimento;
     private double saldo;
+    private ArrayList<Voo> reservas = new ArrayList<>();
 
     public Conta (String nome, String email, String senha, String endereco, String telefone, String passaporte, String cpf, Date dataNascimento) {
         this.nome = nome;
@@ -84,6 +86,12 @@ public class Conta {
     }
 
     public void setSaldo(double saldo) {this.saldo = saldo;}
+    public ArrayList<Voo> getReservas() {
+        return reservas;
+    }
+    public void addReserva(Voo voo) {
+        reservas.add(voo);
+    }
 
 
 

@@ -96,11 +96,9 @@ public class Login extends JFrame implements ActionListener {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
     }
-
-    public Conta getContaLogada() {
+    public static Conta getContaLogada() {
         return contaLogada;
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == confirma) {

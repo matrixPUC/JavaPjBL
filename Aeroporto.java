@@ -4,15 +4,15 @@ public class Aeroporto {
     private String nome;
     private String endereco;
     private String codIATAAeroporto;
-    private ArrayList<Voo> voosAeroporto;
+//    private ArrayList<Voo> voosAeroporto;
 //    private ArrayList<VooNacional> voosNacionais;
 //    private ArrayList<VooInternacional> voosInternacionais;
 
-    public Aeroporto(String nome, String endereco, String codIATAAeroporto, ArrayList<Voo> voosAeroporto/*, ArrayList<VooNacional> voosNacionais, ArrayList<VooInternacional> voosInternacionais*/) {
+    public Aeroporto(String nome, String endereco, String codIATAAeroporto/* ArrayList<Voo> voosAeroporto/*, ArrayList<VooNacional> voosNacionais, ArrayList<VooInternacional> voosInternacionais*/) {
         this.nome = nome;
         this.endereco = endereco;
         this.codIATAAeroporto = codIATAAeroporto;
-        this.voosAeroporto = voosAeroporto;
+//        this.voosAeroporto = voosAeroporto;
 //        this.voosNacionais = voosNacionais;
 //        this.voosInternacionais = voosInternacionais;
     }
@@ -41,13 +41,13 @@ public class Aeroporto {
         this.codIATAAeroporto = codIATAAeroporto;
     }
 
-    public ArrayList<Voo> getVoosAeroporto() {
-        return voosAeroporto;
-    }
+//    public ArrayList<Voo> getVoosAeroporto() {
+//        return voosAeroporto;
+//    }
 
-    public void setVoosAeroporto(ArrayList<Voo> voosAeroporto) {
-        this.voosAeroporto = voosAeroporto;
-    }
+//    public void setVoosAeroporto(ArrayList<Voo> voosAeroporto) {
+//        this.voosAeroporto = voosAeroporto;
+//    }
 
     //    public ArrayList<VooNacional> getVoosNacionais() {
 //        return voosNacionais;
