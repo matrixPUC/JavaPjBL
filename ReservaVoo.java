@@ -10,9 +10,12 @@ public class ReservaVoo extends JFrame implements ActionListener {
     JButton reservasB, voosB;
     JPanel voos, reserva;
     Voo vooAtual;
+    private Login login;
 
-    public ReservaVoo() {
-        JLabel bemvindo = new JLabel("Bem-vindo, " + Login.getContaLogada().getNome());
+    public ReservaVoo(Login login) {
+        this.login = login;
+
+        JLabel bemvindo = new JLabel("Bem-vindo, " + login.getContaLogada().getNome());
         bemvindo.setSize(200, 100);
 
         reservasB = new JButton("Minhas Reservas");
@@ -50,10 +53,10 @@ public class ReservaVoo extends JFrame implements ActionListener {
             criar.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (Login.getContaLogada().getReservas().contains(voo)) {
+                    if (login.getContaLogada().getReservas().contains(voo)) {
                         JOptionPane.showMessageDialog(null, "Uma reserva nesse voo já foi efetuada", "Erro!", JOptionPane.WARNING_MESSAGE);
                     } else {
-                        Login.getContaLogada().addReserva(voo);
+                        login.getContaLogada().addReserva(voo);
                         JOptionPane.showMessageDialog(null, "Reserva realizada!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
                         construirPanelReservas();
                     }
@@ -68,9 +71,7 @@ public class ReservaVoo extends JFrame implements ActionListener {
                 if (((VooInternacional) voo).isNecessitaVisto()) {
                     info.append("\nVisto Necessário");
                 }
-
-            }
-            else {
+            } else {
                 info.setText("Número do Voo: " + voo.getNumeroVoo());
                 info.append("\nOrigem: " + voo.getOrigemVoo());
                 info.append("\nDestino: " + voo.getDestinoVoo());
@@ -109,7 +110,7 @@ public class ReservaVoo extends JFrame implements ActionListener {
 
     private void construirPanelReservas() {
         reserva.removeAll();
-        for (Voo voo : Login.getContaLogada().getReservas()) {
+        for (Voo voo : login.getContaLogada().getReservas()) {
             JPanel reservasCriadas = new JPanel();
             reservasCriadas.setLayout(new BorderLayout());
             JTextArea infoReserva = new JTextArea();
@@ -118,8 +119,7 @@ public class ReservaVoo extends JFrame implements ActionListener {
                 infoReserva.append("\nOrigem: " + voo.getOrigemVoo());
                 infoReserva.append("\nDestino: " + ((VooInternacional) voo).getPaisDestino() + ", " + voo.getDestinoVoo());
                 infoReserva.append("\nData de Partida: " + voo.getDataPartida() + " | Data de Chegada: " + voo.getDataChegada());
-            }
-            else {
+            } else {
                 infoReserva.setText("Número do Voo: " + voo.getNumeroVoo());
                 infoReserva.append("\nOrigem: " + voo.getOrigemVoo());
                 infoReserva.append("\nDestino: " + voo.getDestinoVoo());
